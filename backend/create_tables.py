@@ -7,3 +7,5 @@ async def init_db():
     print("Tables created ✅")
 
 asyncio.run(init_db())
+
+
