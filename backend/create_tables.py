@@ -1,5 +1,6 @@
 import asyncio
 from db import engine, Base
+from models import Task  
 
 async def init_db():
     async with engine.begin() as conn:

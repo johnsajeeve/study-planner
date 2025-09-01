@@ -1,8 +1,9 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-# 👇 Change password to your actual Postgres password
-DATABASE_URL = "postgresql+asyncpg://postgres:yourpassword@localhost:5432/smartplanner"
+
+DATABASE_URL =  "postgresql+asyncpg://johnsajeeve:JOHNjohn$12345@localhost:5433/studyplanner"
+
 
 # Create async engine
 engine = create_async_engine(DATABASE_URL, echo=True, future=True)

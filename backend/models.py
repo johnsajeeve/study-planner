@@ -3,17 +3,17 @@ from sqlalchemy.orm import relationship
 from db import Base
 
 class User(Base):
-    _tablename_= "User"
-    id= Column(Integer,primary_key=True,Index=True)
-    username= Column(String, unique=True,Index=True)
-    email=Column(String, unique=True,Index=True)
+    __tablename__= "User"
+    id= Column(Integer,primary_key=True,index=True)
+    username= Column(String, unique=True,index=True)
+    email=Column(String, unique=True,index=True)
     hashed_password= Column(String)
 
     study_plans= relationship("StudyPlan", back_populates="owner")
 
 class StudyPlan(Base):
-    _tablename_="Study_plans"
-    id= Column(Integer,primary_key=True,Index=True)
+    __tablename__="Study_plans"
+    id= Column(Integer,primary_key=True,index=True)
     title=Column(String)
 
     owner_id = Column(Integer, ForeignKey("users.id"))
@@ -29,5 +29,5 @@ class Task(Base):
     study_plan_id = Column(Integer, ForeignKey("study_plans.id"))
 
     study_plan = relationship("StudyPlan", back_populates="tasks")
-    
+
     
