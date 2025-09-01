@@ -1,22 +1,21 @@
-from fastapi import FastAPI, Depends, HTTPException
+# api/users.py
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
 from sqlalchemy.exc import IntegrityError
-from pydantic import BaseModel
-from db import get_db
-from models import User
+from app.schemas.user import UserCreate, UserRead
+from app.models import User
+from app.core.db import get_db
 
-app = FastAPI()
+router = APIRouter()
 
-@app.post("/users/")
+@router.post("/", response_model=UserRead)
 async def create_user(user: UserCreate, db: AsyncSession = Depends(get_db)):
     new_user = User(**user.dict())
     db.add(new_user)
     try:
         await db.commit()
         await db.refresh(new_user)
-        return {"id": new_user.id, "username": new_user.username, "email": new_user.email}
+        return new_user
     except IntegrityError:
         await db.rollback()
         raise HTTPException(status_code=400, detail="User already exists")
-  
