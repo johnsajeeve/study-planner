@@ -2,9 +2,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
-from app.schemas.user import UserCreate, UserRead
-from app.models import User
-from app.core.db import get_db
+from user import UserCreate, UserRead
+from models import User
+from db import get_db
 
 router = APIRouter()
 
